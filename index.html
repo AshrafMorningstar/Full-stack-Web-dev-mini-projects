@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="200+ fully functional web development mini-projects. Learn HTML, CSS, JavaScript with hands-on projects. Created by Ashraf Morningstar.">
+    <meta name="keywords" content="web development, mini projects, HTML, CSS, JavaScript, learn coding, programming projects, Ashraf Morningstar, beginner projects, web dev portfolio">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://AshrafMorningstar.github.io/Full-stack-Web-dev-mini-projects/">
+    <meta property="og:title" content="200+ Web Development Mini Projects - Ashraf Morningstar">
+    <meta property="og:description" content="Massive collection of fully functional web development projects. Calculators, Games, Utilities, and more!">
+    <meta property="og:image" content="https://AshrafMorningstar.github.io/Full-stack-Web-dev-mini-projects/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://AshrafMorningstar.github.io/Full-stack-Web-dev-mini-projects/">
+    <meta property="twitter:title" content="200+ Web Development Mini Projects - Ashraf Morningstar">
+    <meta property="twitter:description" content="Massive collection of fully functional web development projects. Calculators, Games, Utilities, and more!">
+    <meta property="twitter:image" content="https://AshrafMorningstar.github.io/Full-stack-Web-dev-mini-projects/preview.png">
+    
+    <title>200+ Web Development Mini Projects - Ashraf Morningstar</title>
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .category h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid rgba(255,255,255,0.3);
+            padding-bottom: 0.5rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .project-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .project-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .github-btn {
+            display: inline-block;
+            background: #fff;
+            color: #667eea;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .github-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>🚀 200+ Web Development Mini Projects</h1>
+        <p>Fully Functional • Modern Design • Open Source</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Categories</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free</div>
+            </div>
+        </div>
+        
+        <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" class="github-btn" target="_blank">
+            ⭐ Star on GitHub
+        </a>
+    </div>
+    
+    <div class="container">
+        <div class="category">
+            <h2>🧮 Calculators & Converters</h2>
+            <div class="projects-grid" id="calc-grid"></div>
+        </div>
+        
+        <div class="category">
+            <h2>🎮 Games</h2>
+            <div class="projects-grid" id="games-grid"></div>
+        </div>
+        
+        <div class="category">
+            <h2>📝 Productivity & Utilities</h2>
+            <div class="projects-grid" id="utils-grid"></div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank">Ashraf Morningstar</a></p>
+        <p style="margin-top: 1rem;">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star this repository</a> if you found it helpful!</p>
+    </footer>
+    
+    <script>
+        const projects = {
+            calc: [
+                {name: 'Age Calculator', path: 'Calculators-Converters/Age-Calculator', desc: 'Calculate your exact age'},
+                {name: 'BMI Calculator', path: 'Calculators-Converters/BMI-Calculator', desc: 'Calculate your BMI'},
+                {name: 'Temperature Converter', path: 'Calculators-Converters/Temperature-Converter', desc: 'Convert temperatures'},
+                {name: 'Tip Calculator', path: 'Calculators-Converters/Tip-Calculator', desc: 'Calculate tips easily'},
+                {name: 'Simple Calculator', path: 'Calculators-Converters/Simple-Calculator', desc: 'Basic calculator'},
+                {name: 'Weight Converter', path: 'Calculators-Converters/Weight-Converter', desc: 'Convert weights'},
+                {name: 'Height Converter', path: 'Calculators-Converters/Height-Converter', desc: 'Convert heights'},
+                {name: 'Loan Calculator', path: 'Calculators-Converters/Loan-Calculator', desc: 'Calculate loans'},
+                {name: 'Compound Interest', path: 'Calculators-Converters/Compound-Interest-Calculator', desc: 'Calculate compound interest'},
+                {name: 'VAT Calculator', path: 'Calculators-Converters/VAT-Calculator', desc: 'Calculate VAT'},
+                {name: 'Exchange Rate', path: 'Calculators-Converters/Exchange-Rate-Calculator', desc: 'Convert currencies'},
+                {name: 'LCM-HCF', path: 'Calculators-Converters/LCM-HCF-Calculator', desc: 'Calculate LCM & HCF'}
+            ],
+            games: [
+                {name: 'Tic-Tac-Toe', path: 'Games/Tic-Tac-Toe', desc: 'Classic two-player game'},
+                {name: 'Rock-Paper-Scissors', path: 'Games/Rock-Paper-Scissors', desc: 'Play against computer'},
+                {name: 'Snake Game', path: 'Games/Snake-Game', desc: 'Classic snake game'},
+                {name: 'Memory Card Game', path: 'Games/Memory-Card-Game', desc: 'Match the cards'}
+            ],
+            utils: [
+                {name: 'To-Do List', path: 'Productivity-Utilities/To-Do-List', desc: 'Manage your tasks'},
+                {name: 'Digital Clock', path: 'Productivity-Utilities/Digital-Clock', desc: 'Real-time clock'},
+                {name: 'Countdown Timer', path: 'Productivity-Utilities/Countdown-Timer', desc: 'Set countdown timers'}
+            ]
+        };
+        
+        function createProjectCard(project) {
+            return `
+                <a href="${project.path}/index.html" class="project-card">
+                    <h3>${project.name}</h3>
+                    <p>${project.desc}</p>
+                </a>
+            `;
+        }
+        
+        document.getElementById('calc-grid').innerHTML = projects.calc.map(createProjectCard).join('');
+        document.getElementById('games-grid').innerHTML = projects.games.map(createProjectCard).join('');
+        document.getElementById('utils-grid').innerHTML = projects.utils.map(createProjectCard).join('');
+    </script>
+</body>
+</html>
