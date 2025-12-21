@@ -4,16 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <title>{title}</title>
+    <meta name="description" content="Match pairs of cards to win">
+    <meta name="keywords" content="web development, memory card game, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Memory Card Game">
+    <meta property="og:description" content="Match pairs of cards to win">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Memory Card Game">
+    <meta name="twitter:description" content="Match pairs of cards to win">
+    <title>Memory Card Game - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
     <div class="container">
-<h1>Memory Card Game</h1><p>Card memory matching game</p>
+        <header>
+            <h1>Memory Card Game</h1>
+            <p class="description">Match pairs of cards to win</p>
+        </header>
+        <main>
+
+            <div id="game-stats">
+                <p>Moves: <span id="moves">0</span> | Matches: <span id="matches">0</span>/8</p>
+                <button onclick="initGame()">New Game</button>
+            </div>
+            <div id="game-board"></div>
+    
+        </main>
     </div>
     <footer>
-        <p>Created by <a href="https://github.com/AshrafMorningstar" target="_blank">Ashraf Morningstar</a></p>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
     </footer>
     <script src="script.js"></script>
 </body>

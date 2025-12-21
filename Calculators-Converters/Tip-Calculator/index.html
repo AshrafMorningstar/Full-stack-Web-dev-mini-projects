@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Calculate tip and split bills easily">
+    <meta name="keywords" content="web development, tip calculator, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Tip Calculator">
+    <meta property="og:description" content="Calculate tip and split bills easily">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tip Calculator">
+    <meta name="twitter:description" content="Calculate tip and split bills easily">
+    <title>Tip Calculator - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Tip Calculator</h1>
+            <p class="description">Calculate tip and split bills easily</p>
+        </header>
+        <main>
+
+            <div class="input-group">
+                <label for="bill">Bill Amount ($):</label>
+                <input type="number" id="bill" placeholder="Enter bill amount" step="0.01" required>
+            </div>
+            <div class="input-group">
+                <label for="tip">Tip Percentage (%):</label>
+                <input type="number" id="tip" placeholder="Enter tip %" value="15" min="0" max="100" required>
+            </div>
+            <div class="input-group">
+                <label for="people">Number of People:</label>
+                <input type="number" id="people" placeholder="Number of people" value="1" min="1" required>
+            </div>
+            <button onclick="calculateTip()">Calculate Tip</button>
+            <div id="result" class="result" style="display:none;"></div>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

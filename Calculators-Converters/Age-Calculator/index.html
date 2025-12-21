@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Calculate your exact age in years, months, and days">
+    <meta name="keywords" content="web development, age calculator, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Age Calculator">
+    <meta property="og:description" content="Calculate your exact age in years, months, and days">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Age Calculator">
+    <meta name="twitter:description" content="Calculate your exact age in years, months, and days">
+    <title>Age Calculator - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Age Calculator</h1>
+            <p class="description">Calculate your exact age in years, months, and days</p>
+        </header>
+        <main>
+
+            <div class="input-group">
+                <label for="dob">Enter Your Date of Birth:</label>
+                <input type="date" id="dob" required>
+            </div>
+            <button onclick="calculateAge()">Calculate Age</button>
+            <div id="result" class="result" style="display:none;"></div>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

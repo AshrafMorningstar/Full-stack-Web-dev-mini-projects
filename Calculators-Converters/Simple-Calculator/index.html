@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Perform basic arithmetic operations">
+    <meta name="keywords" content="web development, simple calculator, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Simple Calculator">
+    <meta property="og:description" content="Perform basic arithmetic operations">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Simple Calculator">
+    <meta name="twitter:description" content="Perform basic arithmetic operations">
+    <title>Simple Calculator - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Simple Calculator</h1>
+            <p class="description">Perform basic arithmetic operations</p>
+        </header>
+        <main>
+
+            <div id="calculator">
+                <div id="display">0</div>
+                <div class="calc-buttons">
+                    <button onclick="clearDisplay()" class="operator">C</button>
+                    <button onclick="deleteLast()" class="operator">DEL</button>
+                    <button onclick="appendOperator('%')" class="operator">%</button>
+                    <button onclick="appendOperator('/')" class="operator">÷</button>
+                    
+                    <button onclick="appendNumber('7')">7</button>
+                    <button onclick="appendNumber('8')">8</button>
+                    <button onclick="appendNumber('9')">9</button>
+                    <button onclick="appendOperator('*')" class="operator">×</button>
+                    
+                    <button onclick="appendNumber('4')">4</button>
+                    <button onclick="appendNumber('5')">5</button>
+                    <button onclick="appendNumber('6')">6</button>
+                    <button onclick="appendOperator('-')" class="operator">−</button>
+                    
+                    <button onclick="appendNumber('1')">1</button>
+                    <button onclick="appendNumber('2')">2</button>
+                    <button onclick="appendNumber('3')">3</button>
+                    <button onclick="appendOperator('+')" class="operator">+</button>
+                    
+                    <button onclick="appendNumber('0')" class="zero">0</button>
+                    <button onclick="appendNumber('.')">.</button>
+                    <button onclick="calculate()" class="equals">=</button>
+                </div>
+            </div>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

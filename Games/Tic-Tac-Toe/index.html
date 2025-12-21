@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Classic two-player Tic-Tac-Toe game with score tracking">
+    <meta name="keywords" content="web development, tic-tac-toe, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Tic-Tac-Toe">
+    <meta property="og:description" content="Classic two-player Tic-Tac-Toe game with score tracking">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tic-Tac-Toe">
+    <meta name="twitter:description" content="Classic two-player Tic-Tac-Toe game with score tracking">
+    <title>Tic-Tac-Toe - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Tic-Tac-Toe</h1>
+            <p class="description">Classic two-player Tic-Tac-Toe game with score tracking</p>
+        </header>
+        <main>
+
+            <div id="game-info">
+                <p id="turn">Player X's Turn</p>
+                <p id="score">X: <span id="scoreX">0</span> | O: <span id="scoreO">0</span> | Draws: <span id="scoreDraw">0</span></p>
+            </div>
+            <div id="board"></div>
+            <button onclick="resetGame()" style="margin-top: 1rem;">New Game</button>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Calculate compound interest on investments">
+    <meta name="keywords" content="web development, compound interest calculator, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Compound Interest Calculator">
+    <meta property="og:description" content="Calculate compound interest on investments">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Compound Interest Calculator">
+    <meta name="twitter:description" content="Calculate compound interest on investments">
+    <title>Compound Interest Calculator - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Compound Interest Calculator</h1>
+            <p class="description">Calculate compound interest on investments</p>
+        </header>
+        <main>
+
+            <div class="input-group">
+                <label for="principal">Principal Amount ($):</label>
+                <input type="number" id="principal" placeholder="Initial investment" required>
+            </div>
+            <div class="input-group">
+                <label for="rate">Annual Interest Rate (%):</label>
+                <input type="number" id="rate" placeholder="Interest rate" step="0.01" required>
+            </div>
+            <div class="input-group">
+                <label for="time">Time Period (years):</label>
+                <input type="number" id="time" placeholder="Investment duration" required>
+            </div>
+            <div class="input-group">
+                <label for="compound">Compound Frequency:</label>
+                <select id="compound">
+                    <option value="1">Annually</option>
+                    <option value="2">Semi-annually</option>
+                    <option value="4">Quarterly</option>
+                    <option value="12">Monthly</option>
+                    <option value="365">Daily</option>
+                </select>
+            </div>
+            <button onclick="calculateCompound()">Calculate</button>
+            <div id="result" class="result" style="display:none;"></div>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

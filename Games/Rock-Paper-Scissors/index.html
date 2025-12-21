@@ -4,16 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <title>{title}</title>
+    <meta name="description" content="Classic hand game against computer">
+    <meta name="keywords" content="web development, rock-paper-scissors, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Rock-Paper-Scissors">
+    <meta property="og:description" content="Classic hand game against computer">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rock-Paper-Scissors">
+    <meta name="twitter:description" content="Classic hand game against computer">
+    <title>Rock-Paper-Scissors - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
     <div class="container">
-<h1>Rock-Paper-Scissors</h1><p>Classic hand game</p>
+        <header>
+            <h1>Rock-Paper-Scissors</h1>
+            <p class="description">Classic hand game against computer</p>
+        </header>
+        <main>
+
+            <div id="game">
+                <div id="score-board">
+                    <p>You: <span id="user-score">0</span> | Computer: <span id="comp-score">0</span></p>
+                </div>
+                <div class="choices">
+                    <button class="choice-btn" onclick="play('rock')">🪨 Rock</button>
+                    <button class="choice-btn" onclick="play('paper')">📄 Paper</button>
+                    <button class="choice-btn" onclick="play('scissors')">✂️ Scissors</button>
+                </div>
+                <div id="result" class="result" style="display:none;"></div>
+            </div>
+    
+        </main>
     </div>
     <footer>
-        <p>Created by <a href="https://github.com/AshrafMorningstar" target="_blank">Ashraf Morningstar</a></p>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
     </footer>
     <script src="script.js"></script>
 </body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Ashraf Morningstar">
+    <meta name="description" content="Convert between different height units">
+    <meta name="keywords" content="web development, height converter, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Height Converter">
+    <meta property="og:description" content="Convert between different height units">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Height Converter">
+    <meta name="twitter:description" content="Convert between different height units">
+    <title>Height Converter - Ashraf Morningstar</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="container">
+        <header>
+            <h1>Height Converter</h1>
+            <p class="description">Convert between different height units</p>
+        </header>
+        <main>
+
+            <div class="input-group">
+                <label for="height">Height:</label>
+                <input type="number" id="height" placeholder="Enter height" step="0.01" required>
+            </div>
+            <div class="input-group">
+                <label for="from">From:</label>
+                <select id="from">
+                    <option value="cm">Centimeters (cm)</option>
+                    <option value="m">Meters (m)</option>
+                    <option value="ft">Feet (ft)</option>
+                    <option value="in">Inches (in)</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="to">To:</label>
+                <select id="to">
+                    <option value="ft">Feet (ft)</option>
+                    <option value="cm">Centimeters (cm)</option>
+                    <option value="m">Meters (m)</option>
+                    <option value="in">Inches (in)</option>
+                </select>
+            </div>
+            <button onclick="convertHeight()">Convert</button>
+            <div id="result" class="result" style="display:none;"></div>
+    
+        </main>
+    </div>
+    <footer>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

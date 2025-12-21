@@ -4,16 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <title>{title}</title>
+    <meta name="description" content="Classic snake game with high score">
+    <meta name="keywords" content="web development, snake game, javascript, html, css, ashraf morningstar">
+    <meta property="og:title" content="Snake Game">
+    <meta property="og:description" content="Classic snake game with high score">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Snake Game">
+    <meta name="twitter:description" content="Classic snake game with high score">
+    <title>Snake Game - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
     <div class="container">
-<h1>Snake Game</h1><p>Classic snake game</p>
+        <header>
+            <h1>Snake Game</h1>
+            <p class="description">Classic snake game with high score</p>
+        </header>
+        <main>
+
+            <div id="game-container">
+                <div id="game-info">
+                    <p>Score: <span id="score">0</span> | High Score: <span id="high-score">0</span></p>
+                </div>
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div class="controls">
+                    <button onclick="startGame()">Start Game</button>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Use Arrow Keys to move</p>
+                </div>
+            </div>
+    
+        </main>
     </div>
     <footer>
-        <p>Created by <a href="https://github.com/AshrafMorningstar" target="_blank">Ashraf Morningstar</a></p>
+        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
+        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
     </footer>
     <script src="script.js"></script>
 </body>
