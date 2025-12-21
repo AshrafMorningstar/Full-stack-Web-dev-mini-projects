@@ -4,44 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <meta name="description" content="Classic snake game with high score">
-    <meta name="keywords" content="web development, snake game, javascript, html, css, ashraf morningstar">
-    <meta property="og:title" content="Snake Game">
-    <meta property="og:description" content="Classic snake game with high score">
+    <meta name="description" content="Premium Snake Game application - Premium web application by Ashraf Morningstar">
+    <meta name="keywords" content="snake game, web app, ashraf morningstar, premium design">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Snake Game - Ashraf Morningstar">
+    <meta property="og:description" content="Premium Snake Game application">
     <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Snake Game">
-    <meta name="twitter:description" content="Classic snake game with high score">
+    <meta name="twitter:description" content="Premium Snake Game application">
+    
     <title>Snake Game - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <!-- Created by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
     <div class="container">
-        <header>
-            <h1>Snake Game</h1>
-            <p class="description">Classic snake game with high score</p>
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="title">Snake Game</h1>
+                <p class="subtitle">Premium Snake Game application</p>
+            </div>
+            <div class="theme-indicator" title="Neon Cyber Theme">
+                <span class="theme-dot"></span>
+            </div>
         </header>
-        <main>
+        
+        <main class="app-main">
 
-            <div id="game-container">
-                <div id="game-info">
-                    <p>Score: <span id="score">0</span> | High Score: <span id="high-score">0</span></p>
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="score-board">
+                        <div class="score-item">
+                            <span class="score-label">Score</span>
+                            <span class="score-value" id="score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="score-label">High Score</span>
+                            <span class="score-value" id="highScore">0</span>
+                        </div>
+                    </div>
                 </div>
-                <canvas id="gameCanvas" width="400" height="400"></canvas>
-                <div class="controls">
-                    <button onclick="startGame()">Start Game</button>
-                    <p style="margin-top: 1rem; font-size: 0.9rem;">Use Arrow Keys to move</p>
+                <div class="game-board" id="gameBoard">
+                    <div class="game-message">Click Start to Play!</div>
+                </div>
+                <div class="game-controls">
+                    <button onclick="startGame()" class="game-btn start-btn">
+                        <span>🎮</span> Start Game
+                    </button>
+                    <button onclick="resetGame()" class="game-btn reset-btn">
+                        <span>🔄</span> Reset
+                    </button>
                 </div>
             </div>
     
         </main>
+        
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="creator-badge">
+                    <span class="badge-icon">✨</span>
+                    Crafted by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a>
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank" class="github-star">
+                        ⭐ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
-        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
-    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>

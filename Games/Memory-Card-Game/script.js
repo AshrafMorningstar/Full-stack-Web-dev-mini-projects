@@ -1,78 +1,122 @@
+/*
+ * Premium JavaScript by Ashraf Morningstar
+ * GitHub: https://github.com/AshrafMorningstar
+ * Project: Memory Card Game
+ */
 
-const emojis = ['🎮', '🎯', '🎨', '🎭', '🎪', '🎸', '🎹', '🎺'];
-let cards = [...emojis, ...emojis];
-let flippedCards = [];
-let matchedPairs = 0;
-let moves = 0;
-
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-function initGame() {
-    cards = shuffle([...emojis, ...emojis]);
-    flippedCards = [];
-    matchedPairs = 0;
-    moves = 0;
-    document.getElementById('moves').textContent = moves;
-    document.getElementById('matches').textContent = matchedPairs;
+// Initialize app
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('%c✨ Memory Card Game by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
     
-    const board = document.getElementById('game-board');
-    board.innerHTML = '';
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
     
-    cards.forEach((emoji, index) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.dataset.emoji = emoji;
-        card.dataset.index = index;
-        card.addEventListener('click', flipCard);
-        board.appendChild(card);
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
+});
+
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
 }
 
-function flipCard(e) {
-    const card = e.target;
-    
-    if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length === 2) {
-        return;
-    }
-    
-    card.textContent = card.dataset.emoji;
-    card.classList.add('flipped');
-    flippedCards.push(card);
-    
-    if (flippedCards.length === 2) {
-        moves++;
-        document.getElementById('moves').textContent = moves;
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
         
-        setTimeout(checkMatch, 500);
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
     }
 }
 
-function checkMatch() {
-    const [card1, card2] = flippedCards;
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
     
-    if (card1.dataset.emoji === card2.dataset.emoji) {
-        card1.classList.add('matched');
-        card2.classList.add('matched');
-        matchedPairs++;
-        document.getElementById('matches').textContent = matchedPairs;
-        
-        if (matchedPairs === 8) {
-            setTimeout(() => alert(`Congratulations! You won in ${moves} moves!`), 300);
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
         }
-    } else {
-        card1.textContent = '';
-        card2.textContent = '';
-        card1.classList.remove('flipped');
-        card2.classList.remove('flipped');
     }
-    
-    flippedCards = [];
+`;
+document.head.appendChild(style);
+
+let score = 0;
+let highScore = localStorage.getItem('highScore_' + document.title) || 0;
+document.getElementById('highScore').textContent = highScore;
+
+function startGame() {
+    score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Game Started!';
+    // Game logic here
 }
 
-initGame();
+function resetGame() {
+    score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Click Start to Play!';
+}
+
+function updateScore() {
+    document.getElementById('score').textContent = score;
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore_' + document.title, highScore);
+        document.getElementById('highScore').textContent = highScore;
+    }
+}

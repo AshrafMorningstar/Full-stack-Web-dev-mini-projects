@@ -1,34 +1,129 @@
+/*
+ * Premium JavaScript by Ashraf Morningstar
+ * GitHub: https://github.com/AshrafMorningstar
+ * Project: Digital Clock
+ */
 
-let is24Hour = true;
+// Initialize app
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('%c✨ Digital Clock by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
+});
 
-function updateClock() {
-    const now = new Date();
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
     
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    let ampm = '';
-    
-    if (!is24Hour) {
-        ampm = hours >= 12 ? ' PM' : ' AM';
-        hours = hours % 12 || 12;
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+}
+
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
     }
     
-    const timeString = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}${ampm}`;
-    document.getElementById('time').textContent = timeString;
-    
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    
-    const dateString = `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
-    document.getElementById('date').textContent = dateString;
-    document.getElementById('day').textContent = days[now.getDay()];
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+let interval = null;
+let seconds = 0;
+
+function updateDisplay() {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    document.querySelector('.time-value').textContent = 
+        `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 }
 
-function toggleFormat() {
-    is24Hour = !is24Hour;
-    updateClock();
+function startTime() {
+    if (!interval) {
+        interval = setInterval(() => {
+            seconds++;
+            updateDisplay();
+        }, 1000);
+    }
 }
 
-setInterval(updateClock, 1000);
-updateClock();
+function pauseTime() {
+    if (interval) {
+        clearInterval(interval);
+        interval = null;
+    }
+}
+
+function resetTime() {
+    pauseTime();
+    seconds = 0;
+    updateDisplay();
+}

@@ -1,55 +1,129 @@
+/*
+ * Premium JavaScript by Ashraf Morningstar
+ * GitHub: https://github.com/AshrafMorningstar
+ * Project: Countdown Timer
+ */
 
-let totalSeconds = 0;
-let interval = null;
+// Initialize app
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('%c✨ Countdown Timer by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
+});
 
-function startTimer() {
-    if (interval) return;
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
     
-    if (totalSeconds === 0) {
-        const hours = parseInt(document.getElementById('hours').value) || 0;
-        const minutes = parseInt(document.getElementById('minutes').value) || 0;
-        const seconds = parseInt(document.getElementById('seconds').value) || 0;
-        totalSeconds = hours * 3600 + minutes * 60 + seconds;
-    }
-    
-    if (totalSeconds === 0) {
-        alert('Please set a time');
-        return;
-    }
-    
-    interval = setInterval(() => {
-        totalSeconds--;
-        updateDisplay();
-        
-        if (totalSeconds === 0) {
-            clearInterval(interval);
-            interval = null;
-            alert('Time is up!');
-        }
-    }, 1000);
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
 }
 
-function pauseTimer() {
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+let interval = null;
+let seconds = 0;
+
+function updateDisplay() {
+    const hrs = Math.floor(seconds / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    document.querySelector('.time-value').textContent = 
+        `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function startTime() {
+    if (!interval) {
+        interval = setInterval(() => {
+            seconds++;
+            updateDisplay();
+        }, 1000);
+    }
+}
+
+function pauseTime() {
     if (interval) {
         clearInterval(interval);
         interval = null;
     }
 }
 
-function resetTimer() {
-    pauseTimer();
-    totalSeconds = 0;
-    document.getElementById('hours').value = 0;
-    document.getElementById('minutes').value = 1;
-    document.getElementById('seconds').value = 0;
+function resetTime() {
+    pauseTime();
+    seconds = 0;
     updateDisplay();
-}
-
-function updateDisplay() {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    
-    document.getElementById('display').textContent = 
-        `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }

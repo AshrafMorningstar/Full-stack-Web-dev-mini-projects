@@ -4,45 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <meta name="description" content="Manage your tasks with local storage persistence">
-    <meta name="keywords" content="web development, to-do list, javascript, html, css, ashraf morningstar">
-    <meta property="og:title" content="To-Do List">
-    <meta property="og:description" content="Manage your tasks with local storage persistence">
+    <meta name="description" content="Premium To-Do List application - Premium web application by Ashraf Morningstar">
+    <meta name="keywords" content="to-do list, web app, ashraf morningstar, premium design">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="To-Do List - Ashraf Morningstar">
+    <meta property="og:description" content="Premium To-Do List application">
     <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="To-Do List">
-    <meta name="twitter:description" content="Manage your tasks with local storage persistence">
+    <meta name="twitter:description" content="Premium To-Do List application">
+    
     <title>To-Do List - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <!-- Created by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
     <div class="container">
-        <header>
-            <h1>To-Do List</h1>
-            <p class="description">Manage your tasks with local storage persistence</p>
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="title">To-Do List</h1>
+                <p class="subtitle">Premium To-Do List application</p>
+            </div>
+            <div class="theme-indicator" title="Royal Gold Theme">
+                <span class="theme-dot"></span>
+            </div>
         </header>
-        <main>
+        
+        <main class="app-main">
 
-            <div class="input-group">
-                <input type="text" id="taskInput" placeholder="Add a new task..." onkeypress="if(event.key==='Enter') addTask()">
-                <button onclick="addTask()">Add Task</button>
+            <div class="productivity-container">
+                <div class="input-bar">
+                    <input type="text" id="taskInput" placeholder="Add new item..." class="task-input">
+                    <button onclick="addItem()" class="add-btn">
+                        <span>➕</span>
+                    </button>
+                </div>
+                <div class="filter-tabs">
+                    <button class="tab-btn active" data-filter="all">All</button>
+                    <button class="tab-btn" data-filter="active">Active</button>
+                    <button class="tab-btn" data-filter="completed">Completed</button>
+                </div>
+                <div id="itemList" class="item-list"></div>
+                <div class="stats-bar">
+                    <span id="stats">0 items</span>
+                </div>
             </div>
-            <div class="filter-buttons">
-                <button onclick="filterTasks('all')" class="filter-btn active" data-filter="all">All</button>
-                <button onclick="filterTasks('active')" class="filter-btn" data-filter="active">Active</button>
-                <button onclick="filterTasks('completed')" class="filter-btn" data-filter="completed">Completed</button>
-            </div>
-            <ul id="taskList"></ul>
-            <div id="stats" style="text-align: center; margin-top: 1rem; color: var(--text-secondary);"></div>
     
         </main>
+        
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="creator-badge">
+                    <span class="badge-icon">✨</span>
+                    Crafted by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a>
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank" class="github-star">
+                        ⭐ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
-        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
-    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>

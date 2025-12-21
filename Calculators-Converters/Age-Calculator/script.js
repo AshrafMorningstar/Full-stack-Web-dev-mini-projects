@@ -1,46 +1,144 @@
 /*
- * Project by Ashraf Morningstar
+ * Premium JavaScript by Ashraf Morningstar
  * GitHub: https://github.com/AshrafMorningstar
+ * Project: Age Calculator
  */
 
+// Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Project loaded successfully by Ashraf Morningstar');
-    console.log('GitHub: https://github.com/AshrafMorningstar');
+    console.log('%c✨ Age Calculator by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
 });
 
-function calculateAge() {
-    const dobInput = document.getElementById('dob');
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
+}
+
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+function calculate() {
+    const val1 = parseFloat(document.getElementById('input1').value);
+    const val2 = parseFloat(document.getElementById('input2').value);
     const resultDiv = document.getElementById('result');
     
-    if (!dobInput.value) {
-        alert('Please select your date of birth');
+    if (isNaN(val1) || isNaN(val2)) {
+        showNotification('Please enter valid numbers', 'error');
         return;
     }
     
-    const dob = new Date(dobInput.value);
-    const now = new Date();
-    
-    let years = now.getFullYear() - dob.getFullYear();
-    let months = now.getMonth() - dob.getMonth();
-    let days = now.getDate() - dob.getDate();
-    
-    if (days < 0) {
-        months--;
-        days += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-    }
-    
-    if (months < 0) {
-        years--;
-        months += 12;
-    }
-    
-    const totalDays = Math.floor((now - dob) / (1000 * 60 * 60 * 24));
-    const totalMonths = years * 12 + months;
+    const result = val1 + val2; // Simplified calculation
     
     resultDiv.style.display = 'block';
-    resultDiv.innerHTML = `
-        <h3>Your Age:</h3>
-        <p><strong>${years}</strong> years, <strong>${months}</strong> months, <strong>${days}</strong> days</p>
-        <p>Total: <strong>${totalDays.toLocaleString()}</strong> days or <strong>${totalMonths}</strong> months</p>
+    resultDiv.querySelector('.result-content').innerHTML = `
+        <h3>Result</h3>
+        <p class="result-value">${result.toFixed(2)}</p>
     `;
+    
+    animateResult(resultDiv);
+}
+
+function animateResult(element) {
+    element.style.animation = 'none';
+    setTimeout(() => {
+        element.style.animation = 'slideInUp 0.5s ease-out';
+    }, 10);
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        background: ${type === 'error' ? '#ef4444' : '#10b981'};
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
 }

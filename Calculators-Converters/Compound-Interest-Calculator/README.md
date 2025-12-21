@@ -1,24 +1,20 @@
 # Compound Interest Calculator
 
-Calculate compound interest on investments
+Premium Compound Interest Calculator with unique UI design.
 
 ## Features
-- Fully responsive design
-- Modern UI with gradient backgrounds
-- Smooth animations
-- Mobile-friendly
-
-## Technologies Used
-- HTML5
-- CSS3 (Modern gradients, flexbox, grid)
-- Vanilla JavaScript
+- ✨ Unique premium design
+- 🎨 Arctic Ice color theme
+- 📱 Fully responsive
+- ⚡ Fast and lightweight
+- 🔥 Modern animations
 
 ## Author
 **Ashraf Morningstar**
 - GitHub: [https://github.com/AshrafMorningstar](https://github.com/AshrafMorningstar)
 
 ## Live Demo
-[View Live Demo](https://AshrafMorningstar.github.io/Full-stack-Web-dev-mini-projects/Calculators-Converters/Compound-Interest-Calculator/)
+[View Live](https://github.io/AshrafMorningstar/Full-stack-Web-dev-mini-projects/Calculators-Converters/Compound-Interest-Calculator/)
 
 ---
-⭐ Star this repository if you found it helpful!
+⭐ Star this repository!

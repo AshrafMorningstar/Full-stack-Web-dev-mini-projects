@@ -4,52 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ashraf Morningstar">
-    <meta name="description" content="Customizable countdown timer">
-    <meta name="keywords" content="web development, countdown timer, javascript, html, css, ashraf morningstar">
-    <meta property="og:title" content="Countdown Timer">
-    <meta property="og:description" content="Customizable countdown timer">
+    <meta name="description" content="Premium Countdown Timer application - Premium web application by Ashraf Morningstar">
+    <meta name="keywords" content="countdown timer, web app, ashraf morningstar, premium design">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Countdown Timer - Ashraf Morningstar">
+    <meta property="og:description" content="Premium Countdown Timer application">
     <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Countdown Timer">
-    <meta name="twitter:description" content="Customizable countdown timer">
+    <meta name="twitter:description" content="Premium Countdown Timer application">
+    
     <title>Countdown Timer - Ashraf Morningstar</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Project by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <!-- Created by Ashraf Morningstar - https://github.com/AshrafMorningstar -->
+    <div class="background-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+    
     <div class="container">
-        <header>
-            <h1>Countdown Timer</h1>
-            <p class="description">Customizable countdown timer</p>
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="title">Countdown Timer</h1>
+                <p class="subtitle">Premium Countdown Timer application</p>
+            </div>
+            <div class="theme-indicator" title="Neon Cyber Theme">
+                <span class="theme-dot"></span>
+            </div>
         </header>
-        <main>
+        
+        <main class="app-main">
 
-            <div class="input-group">
-                <label for="hours">Hours:</label>
-                <input type="number" id="hours" min="0" value="0">
+            <div class="time-container">
+                <div class="time-display" id="timeDisplay">
+                    <div class="time-value">00:00:00</div>
+                    <div class="time-label">Countdown Timer</div>
+                </div>
+                <div class="time-controls">
+                    <button onclick="startTime()" class="control-btn">▶️ Start</button>
+                    <button onclick="pauseTime()" class="control-btn">⏸️ Pause</button>
+                    <button onclick="resetTime()" class="control-btn">🔄 Reset</button>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="minutes">Minutes:</label>
-                <input type="number" id="minutes" min="0" max="59" value="1">
-            </div>
-            <div class="input-group">
-                <label for="seconds">Seconds:</label>
-                <input type="number" id="seconds" min="0" max="59" value="0">
-            </div>
-            <div class="timer-controls">
-                <button onclick="startTimer()">Start</button>
-                <button onclick="pauseTimer()">Pause</button>
-                <button onclick="resetTimer()">Reset</button>
-            </div>
-            <div id="display" class="timer-display">00:01:00</div>
     
         </main>
+        
+        <footer class="app-footer">
+            <div class="footer-content">
+                <p class="creator-badge">
+                    <span class="badge-icon">✨</span>
+                    Crafted by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a>
+                </p>
+                <div class="social-links">
+                    <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank" class="github-star">
+                        ⭐ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <p>Created with ❤️ by <a href="https://github.com/AshrafMorningstar" target="_blank" rel="noopener">Ashraf Morningstar</a></p>
-        <p class="github-link">⭐ <a href="https://github.com/AshrafMorningstar/Full-stack-Web-dev-mini-projects" target="_blank">Star on GitHub</a></p>
-    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>

@@ -1,6 +1,20 @@
 # Chess Game
 
-Basic chess game
+Premium Chess Game with unique UI design.
 
-## Created By
-[Ashraf Morningstar](https://github.com/AshrafMorningstar)
+## Features
+- ✨ Unique premium design
+- 🎨 Ocean Breeze color theme
+- 📱 Fully responsive
+- ⚡ Fast and lightweight
+- 🔥 Modern animations
+
+## Author
+**Ashraf Morningstar**
+- GitHub: [https://github.com/AshrafMorningstar](https://github.com/AshrafMorningstar)
+
+## Live Demo
+[View Live](https://github.io/AshrafMorningstar/Full-stack-Web-dev-mini-projects/Games/Chess-Game/)
+
+---
+⭐ Star this repository!

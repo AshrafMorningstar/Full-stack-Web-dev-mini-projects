@@ -1,97 +1,122 @@
 /*
- * Project by Ashraf Morningstar
+ * Premium JavaScript by Ashraf Morningstar
  * GitHub: https://github.com/AshrafMorningstar
+ * Project: Tic-Tac-Toe
  */
 
+// Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Project loaded successfully by Ashraf Morningstar');
-    console.log('GitHub: https://github.com/AshrafMorningstar');
+    console.log('%c✨ Tic-Tac-Toe by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
 });
 
-let board = ['', '', '', '', '', '', '', '', ''];
-let currentPlayer = 'X';
-let gameActive = true;
-let scores = { X: 0, O: 0, draw: 0 };
-
-const winPatterns = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-    [0, 4, 8], [2, 4, 6] // diagonals
-];
-
-function initBoard() {
-    const boardElement = document.getElementById('board');
-    boardElement.innerHTML = '';
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
     
-    for (let i = 0; i < 9; i++) {
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.dataset.index = i;
-        cell.addEventListener('click', handleCellClick);
-        boardElement.appendChild(cell);
-    }
-}
-
-function handleCellClick(e) {
-    const index = e.target.dataset.index;
-    
-    if (board[index] !== '' || !gameActive) return;
-    
-    board[index] = currentPlayer;
-    e.target.textContent = currentPlayer;
-    e.target.classList.add('taken', currentPlayer.toLowerCase());
-    
-    if (checkWin()) {
-        gameActive = false;
-        scores[currentPlayer]++;
-        updateScores();
-        highlightWinner();
-        document.getElementById('turn').textContent = `Player ${currentPlayer} Wins! 🎉`;
-        return;
-    }
-    
-    if (board.every(cell => cell !== '')) {
-        gameActive = false;
-        scores.draw++;
-        updateScores();
-        document.getElementById('turn').textContent = "It's a Draw!";
-        return;
-    }
-    
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-    document.getElementById('turn').textContent = `Player ${currentPlayer}'s Turn`;
-}
-
-function checkWin() {
-    return winPatterns.some(pattern => {
-        const [a, b, c] = pattern;
-        return board[a] && board[a] === board[b] && board[a] === board[c];
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
     });
 }
 
-function highlightWinner() {
-    winPatterns.forEach(pattern => {
-        const [a, b, c] = pattern;
-        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            document.querySelectorAll('.cell')[a].classList.add('winner');
-            document.querySelectorAll('.cell')[b].classList.add('winner');
-            document.querySelectorAll('.cell')[c].classList.add('winner');
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
         }
-    });
-}
+    }
+`;
+document.head.appendChild(style);
 
-function updateScores() {
-    document.getElementById('scoreX').textContent = scores.X;
-    document.getElementById('scoreO').textContent = scores.O;
-    document.getElementById('scoreDraw').textContent = scores.draw;
+let score = 0;
+let highScore = localStorage.getItem('highScore_' + document.title) || 0;
+document.getElementById('highScore').textContent = highScore;
+
+function startGame() {
+    score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Game Started!';
+    // Game logic here
 }
 
 function resetGame() {
-    board = ['', '', '', '', '', '', '', '', ''];
-    currentPlayer = 'X';
-    gameActive = true;
-    document.getElementById('turn').textContent = "Player X's Turn";
-    initBoard();
+    score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Click Start to Play!';
 }
 
-initBoard();
+function updateScore() {
+    document.getElementById('score').textContent = score;
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore_' + document.title, highScore);
+        document.getElementById('highScore').textContent = highScore;
+    }
+}

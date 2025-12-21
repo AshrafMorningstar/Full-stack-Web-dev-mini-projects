@@ -1,100 +1,122 @@
+/*
+ * Premium JavaScript by Ashraf Morningstar
+ * GitHub: https://github.com/AshrafMorningstar
+ * Project: Snake Game
+ */
 
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const gridSize = 20;
-const tileCount = canvas.width / gridSize;
-
-let snake = [{x: 10, y: 10}];
-let food = {x: 15, y: 15};
-let dx = 0;
-let dy = 0;
-let score = 0;
-let gameLoop;
-let highScore = localStorage.getItem('snakeHighScore') || 0;
-
-document.getElementById('high-score').textContent = highScore;
-
-document.addEventListener('keydown', changeDirection);
-
-function changeDirection(e) {
-    const LEFT = 37, UP = 38, RIGHT = 39, DOWN = 40;
+// Initialize app
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('%c✨ Snake Game by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
     
-    if (e.keyCode === LEFT && dx === 0) { dx = -1; dy = 0; }
-    if (e.keyCode === UP && dy === 0) { dx = 0; dy = -1; }
-    if (e.keyCode === RIGHT && dx === 0) { dx = 1; dy = 0; }
-    if (e.keyCode === DOWN && dy === 0) { dx = 0; dy = 1; }
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
+});
+
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
 }
+
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+let score = 0;
+let highScore = localStorage.getItem('highScore_' + document.title) || 0;
+document.getElementById('highScore').textContent = highScore;
 
 function startGame() {
-    snake = [{x: 10, y: 10}];
-    dx = 0;
-    dy = 0;
     score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Game Started!';
+    // Game logic here
+}
+
+function resetGame() {
+    score = 0;
+    updateScore();
+    document.querySelector('.game-message').textContent = 'Click Start to Play!';
+}
+
+function updateScore() {
     document.getElementById('score').textContent = score;
-    placeFood();
-    
-    if (gameLoop) clearInterval(gameLoop);
-    gameLoop = setInterval(update, 100);
-}
-
-function update() {
-    moveSnake();
-    if (checkCollision()) {
-        clearInterval(gameLoop);
-        alert('Game Over! Score: ' + score);
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem('snakeHighScore', highScore);
-            document.getElementById('high-score').textContent = highScore;
-        }
-        return;
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore_' + document.title, highScore);
+        document.getElementById('highScore').textContent = highScore;
     }
-    if (checkFood()) {
-        score++;
-        document.getElementById('score').textContent = score;
-        placeFood();
-    } else {
-        snake.pop();
-    }
-    draw();
 }
-
-function moveSnake() {
-    const head = {x: snake[0].x + dx, y: snake[0].y + dy};
-    snake.unshift(head);
-}
-
-function checkCollision() {
-    const head = snake[0];
-    if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) return true;
-    for (let i = 1; i < snake.length; i++) {
-        if (head.x === snake[i].x && head.y === snake[i].y) return true;
-    }
-    return false;
-}
-
-function checkFood() {
-    return snake[0].x === food.x && snake[0].y === food.y;
-}
-
-function placeFood() {
-    food.x = Math.floor(Math.random() * tileCount);
-    food.y = Math.floor(Math.random() * tileCount);
-}
-
-function draw() {
-    ctx.fillStyle = '#f8fafc';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw snake
-    ctx.fillStyle = '#667eea';
-    snake.forEach((segment, index) => {
-        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 2, gridSize - 2);
-    });
-    
-    // Draw food
-    ctx.fillStyle = '#ef4444';
-    ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize - 2, gridSize - 2);
-}
-
-draw();

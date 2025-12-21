@@ -1,87 +1,164 @@
 /*
- * Project by Ashraf Morningstar
+ * Premium JavaScript by Ashraf Morningstar
  * GitHub: https://github.com/AshrafMorningstar
+ * Project: To-Do List
  */
 
+// Initialize app
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Project loaded successfully by Ashraf Morningstar');
-    console.log('GitHub: https://github.com/AshrafMorningstar');
+    console.log('%c✨ To-Do List by Ashraf Morningstar', 'font-size: 16px; font-weight: bold; color: #667eea;');
+    console.log('%c🔗 https://github.com/AshrafMorningstar', 'font-size: 12px; color: #764ba2;');
+    
+    // Add smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Add ripple effect to buttons
+    addRippleEffect();
+    
+    // Initialize theme indicator tooltip
+    initThemeTooltip();
 });
 
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-let currentFilter = 'all';
-
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+// Ripple effect for buttons
+function addRippleEffect() {
+    const buttons = document.querySelectorAll('button, .btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => ripple.remove(), 600);
+        });
+    });
 }
 
-function addTask() {
+// Theme tooltip
+function initThemeTooltip() {
+    const indicator = document.querySelector('.theme-indicator');
+    if (indicator) {
+        indicator.addEventListener('mouseenter', () => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'theme-tooltip';
+            tooltip.textContent = indicator.getAttribute('title');
+            tooltip.style.cssText = `
+                position: absolute;
+                top: -40px;
+                right: 0;
+                background: rgba(0,0,0,0.8);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                pointer-events: none;
+                animation: slideInUp 0.3s ease-out;
+            `;
+            indicator.appendChild(tooltip);
+        });
+        
+        indicator.addEventListener('mouseleave', () => {
+            const tooltip = indicator.querySelector('.theme-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    }
+}
+
+// Add CSS for ripple effect
+const style = document.createElement('style');
+style.textContent = `
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(0);
+        animation: rippleAnimation 0.6s ease-out;
+        pointer-events: none;
+    }
+    
+    @keyframes rippleAnimation {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+`;
+document.head.appendChild(style);
+
+let items = JSON.parse(localStorage.getItem('items_' + document.title)) || [];
+let filter = 'all';
+
+function addItem() {
     const input = document.getElementById('taskInput');
     const text = input.value.trim();
     
-    if (!text) {
-        alert('Please enter a task');
-        return;
-    }
+    if (!text) return;
     
-    tasks.push({
+    items.push({
         id: Date.now(),
         text: text,
-        completed: false,
-        createdAt: new Date().toISOString()
+        completed: false
     });
     
     input.value = '';
-    saveTasks();
-    renderTasks();
+    saveItems();
+    renderItems();
 }
 
-function toggleTask(id) {
-    const task = tasks.find(t => t.id === id);
-    if (task) {
-        task.completed = !task.completed;
-        saveTasks();
-        renderTasks();
+function toggleItem(id) {
+    const item = items.find(i => i.id === id);
+    if (item) {
+        item.completed = !item.completed;
+        saveItems();
+        renderItems();
     }
 }
 
-function deleteTask(id) {
-    tasks = tasks.filter(t => t.id !== id);
-    saveTasks();
-    renderTasks();
+function deleteItem(id) {
+    items = items.filter(i => i.id !== id);
+    saveItems();
+    renderItems();
 }
 
-function filterTasks(filter) {
-    currentFilter = filter;
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === filter);
-    });
-    renderTasks();
+function saveItems() {
+    localStorage.setItem('items_' + document.title, JSON.stringify(items));
 }
 
-function renderTasks() {
-    const taskList = document.getElementById('taskList');
-    const filteredTasks = tasks.filter(task => {
-        if (currentFilter === 'active') return !task.completed;
-        if (currentFilter === 'completed') return task.completed;
+function renderItems() {
+    const list = document.getElementById('itemList');
+    const filtered = items.filter(item => {
+        if (filter === 'active') return !item.completed;
+        if (filter === 'completed') return item.completed;
         return true;
     });
     
-    taskList.innerHTML = filteredTasks.map(task => `
-        <li class="task-item ${task.completed ? 'completed' : ''}">
-            <span class="task-text" onclick="toggleTask(${task.id})">${task.text}</span>
-            <div class="task-actions">
-                <button onclick="toggleTask(${task.id})">${task.completed ? '↩️' : '✓'}</button>
-                <button class="delete-btn" onclick="deleteTask(${task.id})">🗑️</button>
-            </div>
-        </li>
+    list.innerHTML = filtered.map(item => `
+        <div class="item ${item.completed ? 'completed' : ''}">
+            <span onclick="toggleItem(${item.id})" class="item-text">${item.text}</span>
+            <button onclick="deleteItem(${item.id})" class="delete-btn">🗑️</button>
+        </div>
     `).join('');
     
-    const total = tasks.length;
-    const completed = tasks.filter(t => t.completed).length;
-    const active = total - completed;
-    
-    document.getElementById('stats').textContent = `Total: ${total} | Active: ${active} | Completed: ${completed}`;
+    document.getElementById('stats').textContent = `${items.length} items`;
 }
 
-renderTasks();
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        filter = btn.dataset.filter;
+        renderItems();
+    });
+});
+
+renderItems();
